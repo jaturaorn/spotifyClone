@@ -8,6 +8,7 @@ interface PlayerState {
   audio: HTMLAudioElement | null;
   queue: Track[];
   currentIndex: number;
+  searchResults: Track[];
 
   // Actions
   setTrack: (track: Track) => void;
@@ -17,6 +18,7 @@ interface PlayerState {
   playPrevious: () => void;
   addToQueue: (track: Track) => void;
   removeFromQueue: (trackId: string) => void;
+  searchTracks: (query: string) => Promise<void>;
 }
 
 export const usePlayerStore = create<PlayerState>((set, get) => ({
@@ -26,6 +28,7 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
   audio: null,
   queue: [],
   currentIndex: 0,
+  searchResults: [],
 
   setTrack: (track) => {
     const { audio } = get();
@@ -110,4 +113,5 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
     const deleteItem = queue.filter((queue) => queue.id !== trackId);
     set({ queue: deleteItem });
   },
+  searchTracks: async (query: string) => {},
 }));
