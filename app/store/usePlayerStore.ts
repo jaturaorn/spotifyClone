@@ -15,6 +15,8 @@ interface PlayerState {
   setVolume: (value: number) => void;
   playNext: () => void;
   playPrevious: () => void;
+  addToQueue: (track: Track) => void;
+  removeFromQueue: (trackId: string) => void;
 }
 
 export const usePlayerStore = create<PlayerState>((set, get) => ({
@@ -91,5 +93,21 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
     } else {
       console.log("หมดคิวแล้วครับ!");
     }
+  },
+
+  addToQueue: (track: Track) => {
+    const { queue } = get();
+    const isDuplicate = queue.some((t) => t.id === track.id);
+
+    if (!isDuplicate) {
+      set({ queue: [...queue, track] });
+    }
+  },
+
+  removeFromQueue: (trackId: string) => {
+    const { queue } = get();
+
+    const deleteItem = queue.filter((queue) => queue.id !== trackId);
+    set({ queue: deleteItem });
   },
 }));

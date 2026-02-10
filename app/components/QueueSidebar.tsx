@@ -4,7 +4,7 @@ import Image from "next/image";
 import { usePlayerStore } from "../store/usePlayerStore";
 
 export const QueueSidebar = () => {
-  const { queue, currentIndex, setTrack } = usePlayerStore();
+  const { queue, currentIndex, setTrack, removeFromQueue } = usePlayerStore();
 
   return (
     <div className="w-80 bg-black/40 backdrop-blur-xl border-l border-gray-800 p-6 overflow-y-auto h-[calc(100vh-90px)]">
@@ -13,7 +13,7 @@ export const QueueSidebar = () => {
         {queue.length === 0 ? (
           <p className="text-gray-500 text-sm">ยังไม่มีเพลงในคิว</p>
         ) : (
-          queue.slice(currentIndex + 1).map((track, idx) => (
+          queue.slice(currentIndex + 1).map((track) => (
             <div
               key={track.id}
               className="flex items-center gap-3 group cursor-pointer"
@@ -32,6 +32,12 @@ export const QueueSidebar = () => {
                 </h4>
                 <p className="text-xs text-gray-400 truncate">{track.artist}</p>
               </div>
+              <button
+                onClick={() => removeFromQueue(track.id)}
+                className="opacity-0 group-hover:opacity-100 p-2 text-gray-400 hover:text-red-500 transition"
+              >
+                ✕
+              </button>
             </div>
           ))
         )}

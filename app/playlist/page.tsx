@@ -49,15 +49,24 @@ export default function PlaylistPage() {
                 <td className="p-4 text-gray-400 hidden md:table-cell">
                   {track.artist}
                 </td>
-                <td className="p-4 text-center">
+                <td className="p-4 flex gap-2 justify-center">
+                  {/* ปุ่มเล่นทันที */}
                   <button
-                    onClick={() => {
-                      // 🎯 ภารกิจ: เขียน Logic ตรงนี้เพื่อให้เมื่อกดปุ่ม เพลงใน Store จะเปลี่ยนเป็นเพลงที่คลิก
-                      setTrack(track);
-                    }}
-                    className="w-10 h-10 rounded-full bg-green-500 text-black flex items-center justify-center opacity-0 group-hover:opacity-100 transition shadow-lg"
+                    onClick={() => setTrack(track)}
+                    className="w-8 h-8 rounded-full bg-green-500 text-black flex items-center justify-center opacity-0 group-hover:opacity-100 transition"
                   >
                     ▶️
+                  </button>
+
+                  {/* ปุ่มเพิ่มลงคิว (Add to Queue) */}
+                  <button
+                    onClick={() => {
+                      // 🎯 ภารกิจ: เรียกใช้ฟังก์ชัน addToQueue ที่นี่
+                      // ??? เขียนตรงนี้ ???
+                    }}
+                    className="w-8 h-8 rounded-full bg-gray-700 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition hover:bg-gray-600"
+                  >
+                    ➕
                   </button>
                 </td>
               </tr>
