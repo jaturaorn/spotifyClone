@@ -42,6 +42,8 @@ export default function PlaylistPage() {
                   <Image
                     src={track.albumCover}
                     className="w-10 h-10 rounded"
+                    width={500}
+                    height={500}
                     alt=""
                   />
                   <span className="font-medium">{track.title}</span>
