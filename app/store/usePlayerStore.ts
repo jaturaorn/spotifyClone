@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { Track } from "../types/track";
+import { iTunesResult, Track } from "../types/track";
 
 interface PlayerState {
   currentTrack: Track | null;
@@ -113,5 +113,29 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
     const deleteItem = queue.filter((queue) => queue.id !== trackId);
     set({ queue: deleteItem });
   },
-  searchTracks: async (query: string) => {},
+  searchTracks: async (query: string) => {
+    try {
+      const res = await fetch(
+        `https://itunes.apple.com/search?term=${query}&entity=song&limit=10`,
+      );
+
+      const data = await res.json();
+
+      const formattedTracks = data.results.map((item: iTunesResult) => ({
+        id: item.trackId.toString(),
+        title: item.trackName,
+        artist: item.artistName,
+        albumCover: item.artworkUrl100, // รูปปก
+        previewUrl: item.previewUrl, // ไฟล์เสียง .mp3
+      }));
+
+      set({ searchResults: formattedTracks });
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error("Fetch error:", error.message);
+      } else {
+        console.error("An unknown error occurred", error);
+      }
+    }
+  },
 }));
