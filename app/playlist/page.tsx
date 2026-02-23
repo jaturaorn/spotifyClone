@@ -6,7 +6,7 @@ import { usePlayerStore } from "../store/usePlayerStore";
 
 export default function PlaylistPage() {
   // 1. ดึงฟังก์ชันที่จำเป็นมาจาก Zustand Store (ทิป: เราต้องการฟังก์ชันที่ใช้สั่งเล่นเพลง)
-  const { setTrack } = usePlayerStore();
+  const { setTrack, addToQueue } = usePlayerStore();
 
   return (
     <div className="p-8 bg-gradient-to-b from-blue-900 to-black min-h-screen text-white">
@@ -62,7 +62,7 @@ export default function PlaylistPage() {
                   <button
                     onClick={() => {
                       // 🎯 ภารกิจ: เรียกใช้ฟังก์ชัน addToQueue ที่นี่
-                      // ??? เขียนตรงนี้ ???
+                      addToQueue(track);
                     }}
                     className="w-8 h-8 rounded-full bg-gray-700 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition hover:bg-gray-600"
                   >

@@ -33,7 +33,10 @@ export const QueueSidebar = () => {
                 <p className="text-xs text-gray-400 truncate">{track.artist}</p>
               </div>
               <button
-                onClick={() => removeFromQueue(track.id)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  removeFromQueue(track.id);
+                }}
                 className="opacity-0 group-hover:opacity-100 p-2 text-gray-400 hover:text-red-500 transition"
               >
                 ✕
