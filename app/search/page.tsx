@@ -47,6 +47,8 @@ export default function SearchPage() {
             <Image
               src={track.albumCover}
               className="w-full aspect-square object-cover rounded-lg mb-4 shadow-lg"
+              width={500}
+              height={500}
               alt=""
             />
             <h3 className="font-bold truncate text-sm">{track.title}</h3>
